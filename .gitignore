@@ -1,0 +1,6 @@
+*.log
+tmp
+/npm_modules
+npm-debug.log
+.DS_store
+/*.env
