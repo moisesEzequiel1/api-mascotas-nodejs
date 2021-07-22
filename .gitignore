@@ -1,6 +1,6 @@
 *.log
 tmp
-/npm_modules
+/node_modules
 npm-debug.log
 .DS_store
 /*.env
