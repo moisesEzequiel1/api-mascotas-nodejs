@@ -18,7 +18,7 @@ const router = Router();
 
 router.get('/', async (request, response) => {
     //consultar firebase
-   database.ref('pets').once( 'value' , await (snapshot) => {
+   await database.ref('pets').once( 'value' , (snapshot) => {
         data = snapshot.val();
         response.json(data);
     });
