@@ -2,10 +2,11 @@ require('dotenv').config();
 
 const admin = require('firebase-admin');
 
+
 admin.initializeApp({
     credential: admin.credential.cert({
         "projectId": process.env.PROJECT_ID,
-        "private_key": process.env.PRIVATE_KEY,
+        "private_key": process.env.PRIVATE_KEY.replace(/\\n/g, '\n'),
         "client_email": process.env.CLIENT_EMAIL
     }),
 
@@ -15,13 +16,12 @@ const database = admin.database();
 const { Router } = require( 'express' );
 const router = Router();
 
-router.get('/', async (request, response) => {
+router.get('/', (request, response) => {
     //consultar firebase
-    await database.ref('pets').once( 'value' ,(snapshot) => {
+    database.ref('pets').once( 'value' ,(snapshot) => {
         data = snapshot.val();
         response.json(data);
     });
-
 });
 
 router.post('/new', async (request, response) => {
