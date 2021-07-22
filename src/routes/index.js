@@ -16,9 +16,9 @@ const database = admin.database();
 const { Router } = require( 'express' );
 const router = Router();
 
-router.get('/', (request, response) => {
+router.get('/', async (request, response) => {
     //consultar firebase
-    database.ref('pets').once( 'value' ,(snapshot) => {
+   database.ref('pets').once( 'value' , await (snapshot) => {
         data = snapshot.val();
         response.json(data);
     });
