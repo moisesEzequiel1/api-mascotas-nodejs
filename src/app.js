@@ -1,11 +1,12 @@
 // api-mascotas-seleccion-hackademy
-
+// const morgan = require('morgan');
 const express = require('express');
 const app = express();
 
 app.set('port', process.env.PORT || 3000)
 
 // Middlewares
+// app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 // Rutas

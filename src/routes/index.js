@@ -28,26 +28,22 @@ router.get('/', async (request, response) => {
 
 router.post('/new', async (request, response) => {
         const newPet = {
-            id: request.body.id,
             petName: request.body.petname,
             petAge: request.body.petage,
             petType: request.body.pettype
         }
-        if (newPet.id && newPet.petName){
-        await database.ref('pets/').push(newPet);
-        response.redirect('/');
+        if (newPet.petName){
+        await database.ref('pets/').push(JSON.parse(JSON.stringify(newPet)));
+        response.redirect('/api/pets');
         }else{
-            response.send("Wrong-request");
+            response.send("require: petname");
         }
 });
 
-router.get('/delete/:id', (request, response) => {
-    database.ref('pets/' + request.params.id).remove();
-    response.redirect('/');
+router.get('/delete/:id', async (request, response) => {
+    await database.ref('pets/' + request.params.id).remove();
+    response.redirect('/api/pets/');
 });
-router.post('/debug', (req, res) => {
-    res.json(req.body);
-});        
 
 module.exports = router;
 
